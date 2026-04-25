@@ -2,20 +2,23 @@
 
 <!-- HERO -->
 <section class="hero">
-  <h1>We apply to jobs<br><span class="accent">for you.</span></h1>
-  <p class="hero-sub">
+  <h1 class="animate-fade-up">
+    We apply to jobs<br>
+    <span class="accent">for you.</span>
+  </h1>
+  <p class="hero-sub animate-fade-up delay-1">
     Upload your CV once. Tell us the role you want. Our AI tailors your
     application for every job and applies the moment it's posted — so
     you're always an early applicant.
   </p>
-  <div class="hero-actions">
+  <div class="hero-actions animate-fade-up delay-2">
     <a class="btn-solid lg" routerLink="/signup">Start applying for free →</a>
     <a class="btn-secondary lg" routerLink="/how-it-works">See how it works</a>
   </div>
 </section>
 
 <!-- STATS -->
-<div class="stats-row">
+<div class="stats-row animate-fade-up delay-3">
   <ng-container *ngFor="let stat of stats; let last = last">
     <div class="stat">
       <div class="stat-num">{{ stat.num }}</div>
@@ -29,12 +32,12 @@
 
 <!-- HOW IT WORKS -->
 <section class="section">
-  <div class="section-tag">How it works</div>
-  <div class="section-title">Four steps. Zero stress.</div>
-  <p class="section-sub">From CV upload to interview invite — without lifting a finger after setup.</p>
+  <div class="section-tag animate-fade-up">How it works</div>
+  <div class="section-title animate-fade-up delay-1">Four steps. Zero stress.</div>
+  <p class="section-sub animate-fade-up delay-2">From CV upload to interview invite — without lifting a finger after setup.</p>
 
   <div class="steps">
-    <div class="step" *ngFor="let step of steps">
+    <div class="step animate-fade-up" *ngFor="let step of steps; let i = index" [style.animation-delay]="(i * 0.1 + 0.1) + 's'">
       <div class="step-num">Step {{ step.num }}</div>
       <div class="step-icon">
         <ng-container [ngSwitch]="step.icon">
@@ -66,12 +69,12 @@
 
 <!-- WHY APPLYFORYOU -->
 <section class="section">
-  <div class="section-tag">Why ApplyForYou</div>
-  <div class="section-title">Everything working while you rest.</div>
-  <p class="section-sub">Every feature is designed to get you more interviews with less effort.</p>
+  <div class="section-tag animate-fade-up">Why ApplyForYou</div>
+  <div class="section-title animate-fade-up delay-1">Everything working while you rest.</div>
+  <p class="section-sub animate-fade-up delay-2">Every feature is designed to get you more interviews with less effort.</p>
 
   <div class="features">
-    <div class="feat" *ngFor="let feat of features">
+    <div class="feat animate-scale-in" *ngFor="let feat of features; let i = index" [style.animation-delay]="(i * 0.08 + 0.1) + 's'">
       <div class="feat-icon">
         <ng-container [ngSwitch]="feat.icon">
           <svg *ngSwitchCase="'lightning'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
@@ -92,15 +95,15 @@
 
 <!-- JOB BOARDS -->
 <section class="section boards-section">
-  <div class="section-tag">Job boards we cover</div>
-  <div class="section-title boards-title">We watch these for you, 24/7</div>
-  <div class="boards">
+  <div class="section-tag animate-fade-up">Job boards we cover</div>
+  <div class="section-title boards-title animate-fade-up delay-1">We watch these for you, 24/7</div>
+  <div class="boards animate-fade-up delay-2">
     <span class="board-pill" *ngFor="let board of boards">{{ board }}</span>
   </div>
 </section>
 
 <!-- CTA -->
-<div class="cta-section">
+<div class="cta-section animate-scale-in">
   <h2>Stop applying manually.<br>Let us do it for you.</h2>
   <p>Join thousands of job seekers letting AI handle the hard part.</p>
   <a class="btn-solid lg" routerLink="/signup">Create your free account →</a>

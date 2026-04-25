@@ -1,0 +1,63 @@
+:root {
+  --purple: #7C3AED;
+  --purple-light: #A78BFA;
+  --purple-pale: #EDE9FE;
+  --purple-dark: #5B21B6;
+  --lavender: #C4B5FD;
+  --text: #111;
+  --muted: #6B7280;
+  --card: #F9F8FF;
+  --card-border: #EDE9FE;
+  --border: #E5E7EB;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #fff;
+  color: #111;
+  overflow-x: hidden;
+}
+
+/* ── GLOBAL ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-fade-up   { animation: fadeUp 0.6s ease both; }
+.animate-fade-in   { animation: fadeIn 0.6s ease both; }
+.animate-scale-in  { animation: scaleIn 0.5s ease both; }
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+.delay-6 { animation-delay: 0.6s; }
