@@ -9,8 +9,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { PreferencesComponent } from './pages/preferences/preferences.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { AboutComponent } from './pages/about/about.component';
-
-
+import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component';
 
 
 export const routes: Routes = [
@@ -23,5 +22,6 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'preferences', component: PreferencesComponent },
   { path: 'settings', component: SettingsComponent },
-  { path: 'about', component: AboutComponent }
+  { path: 'about', component: AboutComponent },
+  { path: 'how-it-works', component: HowItWorksComponent }
 ];
