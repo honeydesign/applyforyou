@@ -1,0 +1,106 @@
+<div class="preferences-layout">
+  <app-sidebar></app-sidebar>
+  <main class="main">
+
+    <div class="main-header">
+      <h1>Job Preferences</h1>
+      <p>Tell us exactly what you're looking for — we'll apply to the right jobs</p>
+    </div>
+
+    <div class="content-grid">
+
+      <!-- LEFT -->
+      <div class="left-col">
+
+        <div class="card">
+          <div class="card-title">Role &amp; location</div>
+          <div class="card-sub">The AI will only apply to jobs that match these preferences</div>
+
+          <div class="field">
+            <label>Job title</label>
+            <input type="text" [(ngModel)]="jobTitle" placeholder="e.g. Product Manager"/>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label>Location</label>
+              <input type="text" [(ngModel)]="location" placeholder="e.g. Lagos"/>
+            </div>
+            <div class="field">
+              <label>Country</label>
+              <select [(ngModel)]="country">
+                <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Experience level</label>
+            <select [(ngModel)]="experience">
+              <option *ngFor="let e of experienceLevels" [value]="e">{{ e }}</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Work type</label>
+            <div class="pill-group">
+              <div
+                class="pill"
+                *ngFor="let type of workTypes"
+                [class.active]="selectedWorkType === type"
+                (click)="selectWorkType(type)">
+                {{ type }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Salary expectations</div>
+          <div class="card-sub">We'll skip jobs below your minimum</div>
+          <div class="field">
+            <label>Currency</label>
+            <select [(ngModel)]="currency">
+              <option *ngFor="let c of currencies" [value]="c">{{ c }}</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Minimum salary (per year)</label>
+            <input type="number" [(ngModel)]="minSalary" placeholder="e.g. 3000000"/>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right-col">
+
+        <div class="card">
+          <div class="card-title">Job boards to monitor</div>
+          <div class="card-sub">Turn off any boards you don't want applications sent from</div>
+          <div class="toggle-row" *ngFor="let board of boards">
+            <div class="toggle-label">
+              <strong>{{ board.name }}</strong>
+              <span>{{ board.desc }}</span>
+            </div>
+            <div class="toggle" [class.on]="board.active" (click)="toggleBoard(board)"></div>
+          </div>
+        </div>
+
+        <div class="ai-card">
+          <div class="ai-dot"></div>
+          <div>
+            <h4>AI is applying based on these preferences</h4>
+            <p>Any changes you save will take effect immediately. The AI will stop applying to jobs that no longer match your updated preferences.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="save-row">
+      <button class="btn-save" type="button" (click)="savePreferences()">Save preferences</button>
+    </div>
+
+  </main>
+</div>

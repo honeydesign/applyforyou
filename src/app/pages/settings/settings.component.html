@@ -1,0 +1,92 @@
+<div class="settings-layout">
+  <app-sidebar></app-sidebar>
+  <main class="main">
+
+    <div class="main-header">
+      <h1>Settings</h1>
+      <p>Manage your account, security and notification preferences</p>
+    </div>
+
+    <div class="content-grid">
+
+      <!-- LEFT -->
+      <div class="left-col">
+
+        <div class="card">
+          <div class="card-title">Account</div>
+          <div class="card-sub">Update your login credentials</div>
+          <div class="field">
+            <label>Email address</label>
+            <input type="email" [(ngModel)]="email"/>
+          </div>
+          <div class="field">
+            <label>Current password</label>
+            <input type="password" [(ngModel)]="currentPassword" placeholder="Enter current password"/>
+          </div>
+          <div class="field">
+            <label>New password</label>
+            <input type="password" [(ngModel)]="newPassword" placeholder="Enter new password"/>
+          </div>
+          <div class="field">
+            <label>Confirm new password</label>
+            <input type="password" [(ngModel)]="confirmPassword" placeholder="Repeat new password"/>
+          </div>
+        </div>
+
+        <div class="danger-card">
+          <div class="danger-title">Danger zone</div>
+          <div class="danger-sub">These actions are permanent and cannot be undone</div>
+          <div class="danger-row">
+            <div class="danger-label">
+              <strong>Pause all applications</strong>
+              <span>Temporarily stop the AI from applying</span>
+            </div>
+            <button class="btn-danger" type="button" (click)="pauseAccount()">Pause</button>
+          </div>
+          <div class="danger-row">
+            <div class="danger-label">
+              <strong>Delete account</strong>
+              <span>Permanently remove your account and all data</span>
+            </div>
+            <button class="btn-danger" type="button" (click)="deleteAccount()">Delete</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right-col">
+
+        <div class="card">
+          <div class="card-title">Email notifications</div>
+          <div class="card-sub">Choose what updates we send to your inbox</div>
+          <div class="toggle-row" *ngFor="let n of notifications">
+            <div class="toggle-label">
+              <strong>{{ n.label }}</strong>
+              <span>{{ n.desc }}</span>
+            </div>
+            <div class="toggle" [class.on]="n.active" (click)="toggle(n)"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">AI application settings</div>
+          <div class="card-sub">Control how the AI applies on your behalf</div>
+          <div class="toggle-row" *ngFor="let s of aiSettings">
+            <div class="toggle-label">
+              <strong>{{ s.label }}</strong>
+              <span>{{ s.desc }}</span>
+            </div>
+            <div class="toggle" [class.on]="s.active" (click)="toggle(s)"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="save-row">
+      <button class="btn-save" type="button" (click)="saveSettings()">Save settings</button>
+    </div>
+
+  </main>
+</div>

@@ -1,0 +1,143 @@
+<div class="onboarding-page">
+  <div class="wrapper">
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      <a routerLink="/" class="logo-box">
+        <svg width="22" height="22" viewBox="0 0 44 44" fill="none">
+          <rect x="4" y="8" width="18" height="24" rx="4" fill="white" opacity="0.95"/>
+          <line x1="9" y1="15" x2="17" y2="15" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/>
+          <line x1="9" y1="20" x2="17" y2="20" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/>
+          <line x1="9" y1="25" x2="13" y2="25" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/>
+          <path d="M24 30 L24 16 Q24 12 28 11 Q32 10 32 14 L32 16 Q34 16 34 20 L34 24 Q34 28 30 29 L24 30 Z" fill="#C4B5FD" stroke="#7C3AED" stroke-width="0.5"/>
+        </svg>
+      </a>
+      <div class="step-label">Step <span>{{ currentStep }}</span> of {{ totalSteps }}</div>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width]="progressWidth"></div>
+    </div>
+
+    <!-- ── STEP 1: Upload CV ── -->
+    <div class="card" [style.display]="currentStep === 1 ? 'block' : 'none'">
+      <h2>Upload your CV</h2>
+      <p>We'll use this to tailor your applications. Any format works — we'll handle the rest.</p>
+
+      <div class="upload-zone">
+        <div class="upload-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+        </div>
+        <h4>Drop your CV here</h4>
+        <p>or click to browse your files</p>
+        <div class="formats">PDF · DOC · DOCX</div>
+      </div>
+
+      <div class="or-paste">or paste your CV text below</div>
+      <div class="field">
+        <textarea [(ngModel)]="cvText" placeholder="Paste your CV content here..."></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-next" (click)="next()">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: Job Preferences ── -->
+    <div class="card" [style.display]="currentStep === 2 ? 'block' : 'none'">
+      <h2>What job are you looking for?</h2>
+      <p>Tell us what role you want and where. We'll match and apply to the best opportunities for you.</p>
+
+      <div class="field">
+        <label>Job title</label>
+        <input type="text" [(ngModel)]="jobTitle" placeholder="e.g. Software Engineer, Product Manager"/>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label>Location</label>
+          <input type="text" [(ngModel)]="location" placeholder="e.g. Lagos, Abuja"/>
+        </div>
+        <div class="field">
+          <label>Country</label>
+          <select [(ngModel)]="country">
+            <option>Nigeria</option>
+            <option>Ghana</option>
+            <option>Kenya</option>
+            <option>South Africa</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Work type</label>
+        <div class="pill-group">
+          <div
+            class="pill"
+            *ngFor="let type of workTypes"
+            [class.active]="selectedWorkType === type"
+            (click)="selectWorkType(type)">
+            {{ type }}
+          </div>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:1rem;">
+        <label>Experience level</label>
+        <select [(ngModel)]="experience">
+          <option>Entry level (0–2 years)</option>
+          <option>Mid level (3–5 years)</option>
+          <option>Senior level (6+ years)</option>
+          <option>Manager / Lead</option>
+        </select>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" (click)="back()">← Back</button>
+        <button class="btn-next" (click)="next()">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Confirmation ── -->
+    <div class="card confirm-card" [style.display]="currentStep === 3 ? 'block' : 'none'">
+      <div class="confirm-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h2>You're all set!</h2>
+      <p>We're ready to start applying to jobs on your behalf. Sit back — your next interview is on its way.</p>
+
+      <div class="summary">
+        <div class="summary-row">
+          <span class="summary-label">Role</span>
+          <span class="summary-value">{{ jobTitle || 'Not set' }}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Location</span>
+          <span class="summary-value">{{ location || 'Not set' }}, {{ country }}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Work type</span>
+          <span class="summary-value">{{ selectedWorkType }}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">CV uploaded</span>
+          <span class="summary-value green">✓ Ready</span>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" (click)="back()">← Back</button>
+        <button class="btn-next" routerLink="/dashboard">Go to dashboard →</button>
+      </div>
+    </div>
+
+  </div>
+</div>

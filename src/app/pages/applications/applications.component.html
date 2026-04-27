@@ -1,0 +1,74 @@
+<div class="applications-layout">
+
+  <app-sidebar></app-sidebar>
+
+  <main class="main">
+
+    <div class="main-header">
+      <h1>Applications</h1>
+      <p>All 142 applications sent on your behalf</p>
+    </div>
+
+    <div class="stat-pills">
+      <div class="stat-pill" *ngFor="let stat of stats">
+        <div class="dot" [style.background]="stat.color"></div>
+        <strong>{{ stat.value }}</strong> {{ stat.label }}
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="search-wrap">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" [(ngModel)]="searchQuery" placeholder="Search by job title or company..."/>
+      </div>
+      <select class="filter-select" [(ngModel)]="selectedStatus">
+        <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+      </select>
+      <select class="filter-select" [(ngModel)]="selectedBoard">
+        <option *ngFor="let b of boards" [value]="b">{{ b }}</option>
+      </select>
+      <select class="filter-select" [(ngModel)]="selectedDate">
+        <option *ngFor="let d of dates" [value]="d">{{ d }}</option>
+      </select>
+    </div>
+
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Job</th>
+            <th>Board</th>
+            <th>Applied</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let app of applications">
+            <td>
+              <div class="job-title">{{ app.title }}</div>
+              <div class="company">{{ app.company }}</div>
+            </td>
+            <td><span class="board-pill">{{ app.board }}</span></td>
+            <td><div class="date">{{ app.date }}</div></td>
+            <td><span class="badge" [ngClass]="app.status">{{ getStatusLabel(app.status) }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="pagination">
+        <div class="page-info">Showing 1–8 of 142 applications</div>
+        <div class="page-btns">
+          <div class="page-btn">‹</div>
+          <div class="page-btn active">1</div>
+          <div class="page-btn">2</div>
+          <div class="page-btn">3</div>
+          <div class="page-btn">›</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</div>
