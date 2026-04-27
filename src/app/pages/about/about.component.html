@@ -1,0 +1,85 @@
+<app-navbar></app-navbar>
+
+<!-- HERO -->
+<section class="hero fade-section">
+  <div class="hero-tag">About ApplyForYou</div>
+  <h1>Built for a friend.<br><span class="accent">Needed by millions.</span></h1>
+  <p>ApplyForYou started with one simple goal — help a friend find a job faster. What we discovered along the way changed everything.</p>
+</section>
+
+<hr class="divider"/>
+
+<!-- MISSION -->
+<section class="mission fade-section">
+  <div class="mission-text">
+    <div class="section-tag">Our mission</div>
+    <h2>Level the playing field for African job seekers</h2>
+    <p>Job hunting in Africa is exhausting. Talented people spend months sending hundreds of applications, tailoring CVs by hand, and hearing nothing back — not because they're not good enough, but because the system wasn't built for them.</p>
+    <p>ApplyForYou puts the power of AI on your side. We tailor your CV to every job, apply the moment roles are posted, and make sure you're always first in line.</p>
+  </div>
+  <div class="mission-visual">
+    <div class="mission-stat" *ngFor="let stat of stats">
+      <div class="mission-stat-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+      </div>
+      <div>
+        <div class="mission-stat-num">{{ stat.num }}</div>
+        <div class="mission-stat-label">{{ stat.label }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- VALUES -->
+<section class="values-section fade-section">
+  <div class="section-tag centered">What we stand for</div>
+  <h2 class="centered">Our values</h2>
+  <p class="centered-sub">Everything we build is guided by a few core beliefs about how the world of work should work.</p>
+  <div class="values-grid">
+    <div class="value-card" *ngFor="let v of values">
+      <div class="value-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+      </div>
+      <h3>{{ v.title }}</h3>
+      <p>{{ v.desc }}</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- STORY -->
+<section class="story fade-section">
+  <div class="section-tag centered">Our story</div>
+  <h2 class="centered">It started with a friend.</h2>
+  <p>A close friend was struggling to find a job. Not because they weren't talented — they absolutely were. But sending application after application, tailoring CVs by hand, waiting weeks to hear nothing back — it was draining them.</p>
+  <div class="story-quote">
+    <p>"I just want someone to apply for me while I focus on preparing for interviews."</p>
+  </div>
+  <p>That one sentence was the spark. We built ApplyForYou to do exactly that — take over the repetitive, time-consuming part of job hunting so that talented people can focus on what actually matters: showing up prepared and confident when the interview comes.</p>
+  <p>What started as a tool for one friend quickly became something more. Because that friend's struggle wasn't unique — it was shared by thousands of ambitious Africans trying to break through in a system that wasn't designed with them in mind.</p>
+  <p>Today, ApplyForYou is that friend for everyone.</p>
+</section>
+
+<!-- CTA -->
+<div class="cta-section fade-section">
+  <h2>Ready to let us apply for you?</h2>
+  <p>Join thousands of job seekers letting AI handle the hard part.</p>
+  <a class="btn-solid" routerLink="/signup">Create your free account →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2025 ApplyForYou.</span>
+  <div class="footer-links">
+    <a routerLink="/privacy">Privacy</a>
+    <a routerLink="/terms">Terms</a>
+    <a routerLink="/contact">Contact</a>
+  </div>
+</footer>

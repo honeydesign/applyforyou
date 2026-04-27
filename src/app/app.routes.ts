@@ -8,6 +8,8 @@ import { ApplicationsComponent } from './pages/applications/applications.compone
 import { ProfileComponent } from './pages/profile/profile.component';
 import { PreferencesComponent } from './pages/preferences/preferences.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { AboutComponent } from './pages/about/about.component';
+
 
 
 
@@ -20,5 +22,6 @@ export const routes: Routes = [
   { path: 'applications', component: ApplicationsComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'preferences', component: PreferencesComponent },
-  { path: 'settings', component: SettingsComponent }
+  { path: 'settings', component: SettingsComponent },
+  { path: 'about', component: AboutComponent }
 ];
