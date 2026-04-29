@@ -10,6 +10,8 @@ import { PreferencesComponent } from './pages/preferences/preferences.component'
 import { SettingsComponent } from './pages/settings/settings.component';
 import { AboutComponent } from './pages/about/about.component';
 import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component';
+import { JobBoardsComponent } from './pages/job-boards/job-boards.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 export const routes: Routes = [
@@ -23,5 +25,11 @@ export const routes: Routes = [
   { path: 'preferences', component: PreferencesComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'how-it-works', component: HowItWorksComponent }
+  { path: 'how-it-works', component: HowItWorksComponent },
+  { path: 'job-boards', component: JobBoardsComponent },
+  { path: 'dashboard',    component: DashboardComponent,    canActivate: [AuthGuard] },
+  { path: 'applications', component: ApplicationsComponent, canActivate: [AuthGuard] },
+  { path: 'profile',      component: ProfileComponent,      canActivate: [AuthGuard] },
+  { path: 'preferences',  component: PreferencesComponent,  canActivate: [AuthGuard] },
+  { path: 'settings',     component: SettingsComponent,     canActivate: [AuthGuard] },
 ];

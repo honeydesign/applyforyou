@@ -8,17 +8,17 @@
         <line x1="9" y1="20" x2="17" y2="20" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/>
         <line x1="9" y1="25" x2="13" y2="25" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/>
         <path d="M24 30 L24 16 Q24 12 28 11 Q32 10 32 14 L32 16 Q34 16 34 20 L34 24 Q34 28 30 29 L24 30 Z" fill="#C4B5FD" stroke="#7C3AED" stroke-width="0.5"/>
-        <line x1="28" y1="16" x2="28" y2="28" stroke="#7C3AED" stroke-width="0.8" opacity="0.5" stroke-linecap="round"/>
-        <line x1="8" y1="34" x2="3" y2="34" stroke="#C4B5FD" stroke-width="2" stroke-linecap="round"/>
-        <line x1="8" y1="38" x2="2" y2="38" stroke="#C4B5FD" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
     </a>
-    <div class="logo-name">Apply<span>For</span>You</div>
+    <div class="logo-name">Apply<span>-4-</span>You</div>
   </div>
 
   <div class="card">
     <h1>Create your account</h1>
     <p class="sub">Already have an account? <a routerLink="/login">Log in</a></p>
+
+    <!-- ERROR MESSAGE -->
+    <div class="error-box" *ngIf="error">{{ error }}</div>
 
     <button class="btn-google" type="button">
       <svg width="16" height="16" viewBox="0 0 24 24">
@@ -35,23 +35,23 @@
     <div class="form-row">
       <div class="field">
         <label for="firstName">First name</label>
-        <input id="firstName" type="text" placeholder="Chidi"/>
+        <input id="firstName" type="text" [(ngModel)]="firstName" placeholder="Chidi"/>
       </div>
       <div class="field">
         <label for="lastName">Last name</label>
-        <input id="lastName" type="text" placeholder="Okafor"/>
+        <input id="lastName" type="text" [(ngModel)]="lastName" placeholder="Okafor"/>
       </div>
     </div>
 
     <div class="field">
       <label for="email">Email address</label>
-      <input id="email" type="email" placeholder="chidi@email.com"/>
+      <input id="email" type="email" [(ngModel)]="email" placeholder="chidi&#64;email.com"/>
     </div>
 
     <div class="field">
       <label for="password">Password</label>
       <div class="password-wrap">
-        <input id="password" [type]="showPassword ? 'text' : 'password'" placeholder="Min. 8 characters"/>
+        <input id="password" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" placeholder="Min. 8 characters"/>
         <button class="eye-btn" type="button" (click)="togglePassword()">
           <svg *ngIf="!showPassword" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
@@ -65,7 +65,9 @@
       </div>
     </div>
 
-    <button class="btn-signup" type="button" routerLink="/onboarding">Create free account →</button>
+    <button class="btn-signup" type="button" (click)="onSignup()" [disabled]="loading">
+      {{ loading ? 'Creating account...' : 'Create free account →' }}
+    </button>
 
     <p class="terms">
       By signing up you agree to our

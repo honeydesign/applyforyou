@@ -7,7 +7,7 @@
     <!-- HEADER -->
     <div class="main-header">
       <div>
-        <h1>Good morning, Chidi 👋</h1>
+        <h1>Good morning, {{ firstName }} 👋</h1>
         <p>Here's what's happening with your job search today.</p>
       </div>
       <button class="btn-pause" (click)="togglePause()">
@@ -26,14 +26,19 @@
         <div class="ai-dot" [class.paused]="isPaused"></div>
         <div class="ai-text">
           <strong>{{ isPaused ? 'Applications are paused' : 'AI is actively applying for you' }}</strong>
-          <span>{{ isPaused ? 'Click resume to start applying again' : 'Monitoring 10 job boards · Last applied 4 minutes ago' }}</span>
+          <span>{{ isPaused ? 'Click resume to start applying again' : 'Monitoring 10 job boards · Checking every 15 minutes' }}</span>
         </div>
       </div>
       <button class="btn-solid">View activity</button>
     </div>
 
+    <!-- LOADING STATE -->
+    <div class="loading-grid" *ngIf="loading">
+      <div class="stat-card skeleton" *ngFor="let i of [1,2,3,4]"></div>
+    </div>
+
     <!-- STAT CARDS -->
-    <div class="stats-grid">
+    <div class="stats-grid" *ngIf="!loading">
       <div class="stat-card" *ngFor="let stat of stats">
         <div class="stat-icon">
           <ng-container [ngSwitch]="stat.icon">
@@ -51,7 +56,21 @@
 
     <!-- RECENT APPLICATIONS -->
     <div class="section-title">Recent applications</div>
-    <div class="table-card">
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state" *ngIf="!loading && applications.length === 0">
+      <div class="empty-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+      </div>
+      <h3>No applications yet</h3>
+      <p>Upload your CV and set your preferences — we'll start applying right away!</p>
+    </div>
+
+    <!-- APPLICATIONS TABLE -->
+    <div class="table-card" *ngIf="!loading && applications.length > 0">
       <table>
         <thead>
           <tr>
@@ -64,11 +83,11 @@
         <tbody>
           <tr *ngFor="let app of applications">
             <td>
-              <div class="job-title">{{ app.title }}</div>
+              <div class="job-title">{{ app.jobTitle }}</div>
               <div class="company">{{ app.company }}</div>
             </td>
             <td>{{ app.board }}</td>
-            <td><div class="date">{{ app.date }}</div></td>
+            <td><div class="date">{{ formatDate(app.appliedAt) }}</div></td>
             <td><span class="badge" [ngClass]="app.status">{{ getStatusLabel(app.status) }}</span></td>
           </tr>
         </tbody>

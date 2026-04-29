@@ -1,0 +1,93 @@
+<app-navbar></app-navbar>
+
+<!-- HERO -->
+<section class="hero fade-section">
+  <div class="hero-tag">Job boards</div>
+  <h1>We watch <span class="accent">10+ job boards</span><br>so you don't have to.</h1>
+  <p>Every few minutes, our AI scans these platforms for new job postings that match your preferences — and applies on your behalf the moment they go live.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Boards monitored</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Always watching</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num">15 min</div><div class="stat-label">Average apply time</div></div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- FILTER -->
+<div class="filter-section fade-section">
+  <h2>Filter by</h2>
+  <div class="filter-pills">
+    <div
+      class="filter-pill"
+      *ngFor="let f of filters"
+      [class.active]="activeFilter === f"
+      (click)="setFilter(f)">
+      {{ f }}
+    </div>
+  </div>
+</div>
+
+<!-- ACTIVE BOARDS -->
+<div class="boards-section">
+  <div class="section-label fade-section">Active now</div>
+  <div class="boards-grid fade-section">
+    <div class="board-card" *ngFor="let board of activeBoards">
+      <div class="board-card-top">
+        <div class="board-logo" [style.background]="board.bg" [style.color]="board.color">{{ board.initials }}</div>
+        <div>
+          <div class="board-name">{{ board.name }}</div>
+          <div class="board-region">{{ board.region }}</div>
+        </div>
+      </div>
+      <div class="board-desc">{{ board.desc }}</div>
+      <div class="board-tags">
+        <span class="board-tag" *ngFor="let tag of board.tags" [class]="'board-tag ' + tag.type">{{ tag.label }}</span>
+      </div>
+      <div class="board-footer">
+        <div class="board-jobs"><strong>{{ board.jobs }}</strong></div>
+        <div class="board-status"><div class="status-dot"></div>Live</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label fade-section" style="margin-top:2.5rem;">Coming soon</div>
+  <div class="boards-grid fade-section">
+    <div class="board-card coming" *ngFor="let board of comingBoards">
+      <div class="board-card-top">
+        <div class="board-logo" [style.background]="board.bg" [style.color]="board.color">{{ board.initials }}</div>
+        <div>
+          <div class="board-name">{{ board.name }}</div>
+          <div class="board-region">{{ board.region }}</div>
+        </div>
+      </div>
+      <div class="board-desc">{{ board.desc }}</div>
+      <div class="board-tags">
+        <span class="board-tag" *ngFor="let tag of board.tags" [class]="'board-tag ' + tag.type">{{ tag.label }}</span>
+      </div>
+      <div class="board-footer">
+        <div class="board-jobs">Coming soon</div>
+        <div class="board-status"><div class="status-dot coming"></div>In progress</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section fade-section">
+  <h2>We watch all of these for you — every minute.</h2>
+  <p>Sign up free and we'll start applying to matching jobs across all these boards on your behalf.</p>
+  <a class="btn-solid" routerLink="/signup">Create your free account →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2025 ApplyForYou.</span>
+  <div class="footer-links">
+    <a routerLink="/privacy">Privacy</a>
+    <a routerLink="/terms">Terms</a>
+    <a routerLink="/contact">Contact</a>
+  </div>
+</footer>

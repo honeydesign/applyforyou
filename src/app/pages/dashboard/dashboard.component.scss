@@ -195,3 +195,47 @@ tbody td { padding: 0.85rem 1.25rem; font-size: 13px; color: #374151; }
   .dashboard-layout { grid-template-columns: 1fr; }
   .stats-grid       { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ── LOADING SKELETON ── */
+.loading-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.skeleton {
+  height: 130px;
+  background: linear-gradient(90deg, #EDE9FE 25%, #F5F3FF 50%, #EDE9FE 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 16px;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 3rem;
+  text-align: center;
+
+  .empty-icon {
+    width: 64px;
+    height: 64px;
+    background: #EDE9FE;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+  }
+
+  h3 { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; color: #111; margin-bottom: .4rem; }
+  p  { font-size: 13px; color: #6B7280; }
+}
