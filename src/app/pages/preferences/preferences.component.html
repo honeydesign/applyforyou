@@ -7,6 +7,10 @@
       <p>Tell us exactly what you're looking for — we'll apply to the right jobs</p>
     </div>
 
+    <!-- SUCCESS / ERROR -->
+    <div class="success-box" *ngFor="let s of [success]" [style.display]="success ? 'block' : 'none'">{{ success }}</div>
+    <div class="error-box"   [style.display]="error   ? 'block' : 'none'">{{ error }}</div>
+
     <div class="content-grid">
 
       <!-- LEFT -->
@@ -18,7 +22,7 @@
 
           <div class="field">
             <label>Job title</label>
-            <input type="text" [(ngModel)]="jobTitle" placeholder="e.g. Product Manager"/>
+            <input type="text" [(ngModel)]="jobTitle" placeholder="e.g. Software Engineer"/>
           </div>
 
           <div class="form-row">
@@ -99,7 +103,9 @@
     </div>
 
     <div class="save-row">
-      <button class="btn-save" type="button" (click)="savePreferences()">Save preferences</button>
+      <button class="btn-save" type="button" (click)="savePreferences()" [disabled]="saving">
+        {{ saving ? 'Saving...' : 'Save preferences' }}
+      </button>
     </div>
 
   </main>

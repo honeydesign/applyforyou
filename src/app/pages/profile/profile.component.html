@@ -9,15 +9,19 @@
       <p>Keep your profile up to date for better job matches</p>
     </div>
 
+    <!-- SUCCESS / ERROR -->
+    <div class="success-box" *ngIf="success">{{ success }}</div>
+    <div class="error-box"   *ngIf="error">{{ error }}</div>
+
     <div class="content-grid">
 
       <!-- LEFT — Personal Info -->
       <div class="card">
         <div class="avatar-section">
-          <div class="avatar-big">{{ firstName[0] }}{{ lastName[0] }}</div>
+          <div class="avatar-big">{{ initials }}</div>
           <div class="avatar-info">
             <h3>{{ firstName }} {{ lastName }}</h3>
-            <p>{{ location }}</p>
+            <p>{{ location || 'No location set' }}</p>
             <button class="btn-upload" type="button">Upload photo</button>
           </div>
         </div>
@@ -37,7 +41,7 @@
 
         <div class="field">
           <label>Email address</label>
-          <input type="email" [(ngModel)]="email"/>
+          <input type="email" [(ngModel)]="email" [disabled]="true"/>
         </div>
 
         <div class="form-row">
@@ -47,7 +51,7 @@
           </div>
           <div class="field">
             <label>Location</label>
-            <input type="text" [(ngModel)]="location"/>
+            <input type="text" [(ngModel)]="location" placeholder="Lagos, Nigeria"/>
           </div>
         </div>
 
@@ -80,12 +84,19 @@
           <p>Drop your file here or click to browse</p>
           <div class="formats">PDF · DOC · DOCX</div>
         </div>
+
+        <div class="field" style="margin-top:1rem;">
+          <label>Or paste your CV text</label>
+          <textarea placeholder="Paste your CV content here..." (blur)="onCVTextChange($event)" style="height:150px;"></textarea>
+        </div>
       </div>
 
     </div>
 
     <div class="save-row">
-      <button class="btn-save" type="button" (click)="saveChanges()">Save changes</button>
+      <button class="btn-save" type="button" (click)="saveChanges()" [disabled]="saving">
+        {{ saving ? 'Saving...' : 'Save changes' }}
+      </button>
     </div>
 
   </main>
