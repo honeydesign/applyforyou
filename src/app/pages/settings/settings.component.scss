@@ -231,3 +231,30 @@
   .settings-layout { grid-template-columns: 1fr; }
   .content-grid    { grid-template-columns: 1fr; }
 }
+
+.success-box {
+  background: #D1FAE5;
+  border: 1px solid #6EE7B7;
+  color: #065F46;
+  border-radius: 8px;
+  padding: 0.65rem 0.9rem;
+  font-size: 13px;
+  margin-bottom: 1rem;
+}
+
+.error-box {
+  background: #FEE2E2;
+  border: 1px solid #FCA5A5;
+  color: #991B1B;
+  border-radius: 8px;
+  padding: 0.65rem 0.9rem;
+  font-size: 13px;
+  margin-bottom: 1rem;
+}
+
+.btn-save:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}

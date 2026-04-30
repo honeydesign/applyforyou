@@ -1,11 +1,17 @@
 <div class="settings-layout">
+
   <app-sidebar></app-sidebar>
+
   <main class="main">
 
     <div class="main-header">
       <h1>Settings</h1>
       <p>Manage your account, security and notification preferences</p>
     </div>
+
+    <!-- SUCCESS / ERROR -->
+    <div class="success-box" [style.display]="success ? 'block' : 'none'">{{ success }}</div>
+    <div class="error-box"   [style.display]="error   ? 'block' : 'none'">{{ error }}</div>
 
     <div class="content-grid">
 
@@ -15,6 +21,7 @@
         <div class="card">
           <div class="card-title">Account</div>
           <div class="card-sub">Update your login credentials</div>
+
           <div class="field">
             <label>Email address</label>
             <input type="email" [(ngModel)]="email"/>
@@ -85,8 +92,11 @@
     </div>
 
     <div class="save-row">
-      <button class="btn-save" type="button" (click)="saveSettings()">Save settings</button>
+      <button class="btn-save" type="button" (click)="saveSettings()" [disabled]="saving">
+        {{ saving ? 'Saving...' : 'Save settings' }}
+      </button>
     </div>
 
   </main>
+
 </div>
