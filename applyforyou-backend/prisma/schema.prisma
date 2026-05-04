@@ -8,57 +8,55 @@ datasource db {
 }
 
 model User {
-  id          String   @id @default(cuid())
-  email       String   @unique
-  password    String?
-  firstName   String
-  lastName    String
-  phone       String?
-  location    String?
-  summary     String?
-  avatarUrl   String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
+  id            String          @id @default(cuid())
+  email         String          @unique
+  password      String?
+  firstName     String
+  lastName      String
+  phone         String?
+  location      String?
+  summary       String?
+  avatarUrl     String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  applications  Application[]
   cv            CV?
   preferences   JobPreferences?
-  applications  Application[]
   notifications Notification[]
 }
 
 model CV {
   id         String   @id @default(cuid())
   userId     String   @unique
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   fileName   String?
   fileUrl    String?
   rawText    String
   parsedData Json?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model JobPreferences {
-  id          String   @id @default(cuid())
-  userId      String   @unique
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  jobTitle    String
-  location    String
-  country     String   @default("Nigeria")
-  workType    String   @default("Remote")
-  experience  String   @default("Mid level (3–5 years)")
-  currency    String   @default("NGN")
-  minSalary   Int?
-  isActive    Boolean  @default(true)
-  boards      Json     @default("[\"LinkedIn\",\"Jobberman\",\"Indeed\"]")
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String   @id @default(cuid())
+  userId     String   @unique
+  jobTitle   String
+  location   String
+  country    String   @default("Nigeria")
+  workType   String   @default("Remote")
+  experience String   @default("Mid level (3–5 years)")
+  currency   String   @default("NGN")
+  minSalary  Int?
+  isActive   Boolean  @default(true)
+  boards     Json     @default("[\"LinkedIn\", \"Jobberman\", \"Indeed\"]")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Application {
   id          String   @id @default(cuid())
   userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   jobTitle    String
   company     String
   jobUrl      String?
@@ -69,6 +67,7 @@ model Application {
   atsScore    Int?
   appliedAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([status])
@@ -77,12 +76,12 @@ model Application {
 model Notification {
   id        String   @id @default(cuid())
   userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   type      String
   title     String
   message   String
   read      Boolean  @default(false)
   createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }

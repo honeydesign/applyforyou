@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 .env
 .vercel
+applyforyou-backend/.env

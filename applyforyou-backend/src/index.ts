@@ -8,6 +8,7 @@ import preferencesRoutes  from './routes/preferences.routes';
 import applicationsRoutes from './routes/applications.routes';
 import { errorHandler }   from './middleware/error.middleware';
 import { startCronJobs }  from './services/cron.service';
+import aiRoutes from './routes/ai.routes';
 
 dotenv.config();
 
@@ -32,4 +33,5 @@ app.listen(PORT, () => {
   if (process.env.NODE_ENV !== 'test') startCronJobs();
 });
 
+app.use('/api/ai', aiRoutes);
 export default app;
