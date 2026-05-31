@@ -2,7 +2,7 @@ import cron from 'node-cron';
 import { runApplicationCycle } from './apply.service';
 
 export const startCronJobs = (): void => {
-  cron.schedule('*/15 * * * *', async () => {
+  cron.schedule('0 */2 * * *', async () => {
     console.log('⏰ Running application cycle...');
     await runApplicationCycle();
   });

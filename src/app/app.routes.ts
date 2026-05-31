@@ -11,7 +11,9 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { AboutComponent } from './pages/about/about.component';
 import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component';
 import { JobBoardsComponent } from './pages/job-boards/job-boards.component';
+import { ActivityComponent } from './pages/activity/activity.component';
 import { AuthGuard } from './guards/auth.guard';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
 
 
 export const routes: Routes = [
@@ -27,6 +29,8 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'how-it-works', component: HowItWorksComponent },
   { path: 'job-boards', component: JobBoardsComponent },
+  { path: 'privacy', component: PrivacyComponent },
+  { path: 'activity', component: ActivityComponent, canActivate: [AuthGuard] },
   { path: 'dashboard',    component: DashboardComponent,    canActivate: [AuthGuard] },
   { path: 'applications', component: ApplicationsComponent, canActivate: [AuthGuard] },
   { path: 'profile',      component: ProfileComponent,      canActivate: [AuthGuard] },

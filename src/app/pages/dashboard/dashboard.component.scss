@@ -190,6 +190,52 @@ tbody td { padding: 0.85rem 1.25rem; font-size: 13px; color: #374151; }
   &.rejected  { background: #FEE2E2; color: #991B1B; }
 }
 
+.extension-banner {
+  background: #F5F3FF;
+  border: 1.5px solid #EDE9FE;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.extension-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+
+  strong { display: block; font-size: 14px; font-weight: 700; color: #111; }
+  span   { font-size: 12px; color: #6B7280; }
+}
+
+.extension-icon {
+  width: 40px; height: 40px;
+  background: #EDE9FE; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.extension-banner-right {
+  display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0;
+}
+
+.btn-install {
+  background: #7C3AED; color: #fff;
+  padding: 0.5rem 1rem; border-radius: 8px;
+  font-size: 13px; font-weight: 600;
+  text-decoration: none;
+  &:hover { opacity: 0.9; }
+}
+
+.btn-dismiss {
+  background: none; border: none;
+  color: #9CA3AF; cursor: pointer; font-size: 14px;
+  &:hover { color: #374151; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .dashboard-layout { grid-template-columns: 1fr; }

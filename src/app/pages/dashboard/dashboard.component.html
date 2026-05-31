@@ -29,8 +29,27 @@
           <span>{{ isPaused ? 'Click resume to start applying again' : 'Monitoring 10 job boards · Checking every 15 minutes' }}</span>
         </div>
       </div>
-      <button class="btn-solid">View activity</button>
+      <a class="btn-solid" routerLink="/activity">View activity</a>
     </div>
+
+    <!-- EXTENSION BANNER -->
+<div class="extension-banner" *ngIf="showExtensionBanner">
+  <div class="extension-banner-left">
+    <div class="extension-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+      </svg>
+    </div>
+    <div>
+      <strong>Install our Chrome Extension</strong>
+      <span>Auto-apply to jobs on LinkedIn and Indeed directly from your browser</span>
+    </div>
+  </div>
+  <div class="extension-banner-right">
+    <a class="btn-install" href="https://github.com/honeydesign/apply4you-extension" target="_blank">Install Extension →</a>
+    <button class="btn-dismiss" (click)="dismissExtensionBanner()">✕</button>
+  </div>
+</div>
 
     <!-- LOADING STATE -->
     <div class="loading-grid" *ngIf="loading">
@@ -93,6 +112,8 @@
         </tbody>
       </table>
     </div>
+
+    
 
   </main>
 

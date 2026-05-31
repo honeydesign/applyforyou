@@ -3,12 +3,13 @@ import { NgFor, NgSwitch, NgSwitchCase, NgClass, NgIf } from '@angular/common';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   encapsulation: ViewEncapsulation.None,
-  imports: [NgFor, NgSwitch, NgSwitchCase, NgClass, NgIf, SidebarComponent],
+  imports: [RouterLink, NgFor, NgSwitch, NgSwitchCase, NgClass, NgIf, SidebarComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
@@ -73,4 +74,11 @@ export class DashboardComponent implements OnInit {
   }
 
   get firstName() { return this.user?.firstName || 'there'; }
+
+  showExtensionBanner = !localStorage.getItem('extensionDismissed');
+
+dismissExtensionBanner() {
+  this.showExtensionBanner = false;
+  localStorage.setItem('extensionDismissed', 'true');
+}
 }

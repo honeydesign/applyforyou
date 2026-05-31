@@ -8,6 +8,7 @@ import preferencesRoutes  from './routes/preferences.routes';
 import applicationsRoutes from './routes/applications.routes';
 import { errorHandler }   from './middleware/error.middleware';
 import { startCronJobs }  from './services/cron.service';
+import notificationsRoutes from './routes/notifications.routes';
 import aiRoutes from './routes/ai.routes';
 
 dotenv.config();
@@ -32,6 +33,8 @@ app.listen(PORT, () => {
   console.log(`🚀 Apply-4You API running on port ${PORT}`);
   if (process.env.NODE_ENV !== 'test') startCronJobs();
 });
+
+app.use('/api/notifications', notificationsRoutes);
 
 app.use('/api/ai', aiRoutes);
 export default app;

@@ -1,7 +1,6 @@
 <div class="onboarding-page">
   <div class="wrapper">
 
-    <!-- TOP BAR -->
     <div class="top-bar">
       <a routerLink="/" class="logo-box">
         <svg width="22" height="22" viewBox="0 0 44 44" fill="none">
@@ -15,17 +14,44 @@
       <div class="step-label">Step <span>{{ currentStep }}</span> of {{ totalSteps }}</div>
     </div>
 
-    <!-- PROGRESS BAR -->
     <div class="progress-bar">
       <div class="progress-fill" [style.width]="progressWidth"></div>
     </div>
 
-    <!-- ── STEP 1: Upload CV ── -->
+    <div class="error-box" [style.display]="error ? 'block' : 'none'">{{ error }}</div>
+
+    <!-- STEP 1: Upload CV -->
     <div class="card" [style.display]="currentStep === 1 ? 'block' : 'none'">
       <h2>Upload your CV</h2>
-      <p>We'll use this to tailor your applications. Any format works — we'll handle the rest.</p>
+      <p>We'll use this to tailor your applications to every job.</p>
 
-      <div class="upload-zone">
+      <div class="file-ready" [style.display]="fileReady ? 'flex' : 'none'">
+        <div class="file-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+        </div>
+        <div>
+          <div class="file-name">{{ fileName }}</div>
+          <div class="file-sub">Ready to upload</div>
+        </div>
+        <div class="file-check">✓</div>
+      </div>
+
+      <div
+        class="upload-zone"
+        [style.display]="fileReady ? 'none' : 'block'"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+        (click)="fileInput.click()">
+        <input
+          #fileInput
+          type="file"
+          accept=".pdf,.doc,.docx,.txt"
+          style="display:none"
+          (change)="onFileSelect($event)"/>
         <div class="upload-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -35,7 +61,7 @@
         </div>
         <h4>Drop your CV here</h4>
         <p>or click to browse your files</p>
-        <div class="formats">PDF · DOC · DOCX</div>
+        <div class="formats">PDF · DOC · DOCX · TXT</div>
       </div>
 
       <div class="or-paste">or paste your CV text below</div>
@@ -44,33 +70,61 @@
       </div>
 
       <div class="btn-row">
-        <button class="btn-next" (click)="next()">Continue →</button>
+        <button class="btn-next" (click)="next()" [disabled]="loading">
+          {{ loading ? 'Saving...' : 'Continue →' }}
+        </button>
       </div>
     </div>
 
-    <!-- ── STEP 2: Job Preferences ── -->
+    <!-- STEP 2: Job Preferences -->
     <div class="card" [style.display]="currentStep === 2 ? 'block' : 'none'">
       <h2>What job are you looking for?</h2>
       <p>Tell us what role you want and where. We'll match and apply to the best opportunities for you.</p>
 
-      <div class="field">
+      <!-- JOB TITLE WITH AUTOCOMPLETE -->
+      <div class="field autocomplete-wrap">
         <label>Job title</label>
-        <input type="text" [(ngModel)]="jobTitle" placeholder="e.g. Software Engineer, Product Manager"/>
+        <input
+          type="text"
+          [(ngModel)]="jobTitle"
+          (input)="onJobTitleInput()"
+          (blur)="hideJobSuggestions()"
+          placeholder="e.g. Software Engineer, Product Manager"
+          autocomplete="off"/>
+        <div class="suggestions" [style.display]="jobSuggestions.length > 0 ? 'block' : 'none'">
+          <div
+            class="suggestion-item"
+            *ngFor="let s of jobSuggestions"
+            (mousedown)="selectJobTitle(s)">
+            {{ s }}
+          </div>
+        </div>
       </div>
 
       <div class="form-row">
-        <div class="field">
+        <!-- LOCATION WITH AUTOCOMPLETE -->
+        <div class="field autocomplete-wrap">
           <label>Location</label>
-          <input type="text" [(ngModel)]="location" placeholder="e.g. Lagos, Abuja"/>
+          <input
+            type="text"
+            [(ngModel)]="location"
+            (input)="onLocationInput()"
+            (blur)="hideLocationSuggestions()"
+            placeholder="e.g. Lagos, Abuja"
+            autocomplete="off"/>
+          <div class="suggestions" [style.display]="locationSuggestions.length > 0 ? 'block' : 'none'">
+            <div
+              class="suggestion-item"
+              *ngFor="let s of locationSuggestions"
+              (mousedown)="selectLocation(s)">
+              {{ s }}
+            </div>
+          </div>
         </div>
         <div class="field">
           <label>Country</label>
           <select [(ngModel)]="country">
-            <option>Nigeria</option>
-            <option>Ghana</option>
-            <option>Kenya</option>
-            <option>South Africa</option>
-            <option>Other</option>
+            <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
           </select>
         </div>
       </div>
@@ -91,20 +145,19 @@
       <div class="field" style="margin-top:1rem;">
         <label>Experience level</label>
         <select [(ngModel)]="experience">
-          <option>Entry level (0–2 years)</option>
-          <option>Mid level (3–5 years)</option>
-          <option>Senior level (6+ years)</option>
-          <option>Manager / Lead</option>
+          <option *ngFor="let e of experienceLevels" [value]="e">{{ e }}</option>
         </select>
       </div>
 
       <div class="btn-row">
         <button class="btn-back" (click)="back()">← Back</button>
-        <button class="btn-next" (click)="next()">Continue →</button>
+        <button class="btn-next" (click)="next()" [disabled]="loading">
+          {{ loading ? 'Saving...' : 'Continue →' }}
+        </button>
       </div>
     </div>
 
-    <!-- ── STEP 3: Confirmation ── -->
+    <!-- STEP 3: Confirmation -->
     <div class="card confirm-card" [style.display]="currentStep === 3 ? 'block' : 'none'">
       <div class="confirm-icon">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round">
@@ -128,14 +181,14 @@
           <span class="summary-value">{{ selectedWorkType }}</span>
         </div>
         <div class="summary-row">
-          <span class="summary-label">CV uploaded</span>
-          <span class="summary-value green">✓ Ready</span>
+          <span class="summary-label">CV</span>
+          <span class="summary-value green">✓ Uploaded</span>
         </div>
       </div>
 
       <div class="btn-row">
         <button class="btn-back" (click)="back()">← Back</button>
-        <button class="btn-next" routerLink="/dashboard">Go to dashboard →</button>
+        <button class="btn-next" (click)="next()">Go to dashboard →</button>
       </div>
     </div>
 
